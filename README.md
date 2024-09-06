@@ -1,35 +1,51 @@
-# XmlVSE
-The Volscript Extension module for XML parsing.
+# ToyRobot
 
-# Building
-XmlVSE uses CMake to create build systems and binaries. Build scripts are provided for convenience. Each build mode (`debug`, `release`) will be built in a separate build tree within the build directory. A CMake install target places the final binary and a seti.ini that refers to this binary in the `bin` directory, within an appropriate subdirectory. The build scripts will automatically run CMake install after a successful build.
+This application is a simulation of a toy robot moving on a square table top, of dimensions 5 units x 5 units. There are no other obstructions on the table surface. The robot is free to roam around the surface of the table, but must be prevented from falling to destruction. Any movement that would result in the robot falling from the table must be prevented, however further valid movement commands must still be allowed.
 
-- Windows:
-  ```cmd
-  build.bat --debug
-  ```
+### Commands
 
-- Linux:
-  ```sh
-  ./build.sh --debug
-  ```
+- `PLACE` will put the toy robot on the table in position X,Y and facing NORTH, SOUTH, EAST or WEST.
+- `MOVE`  will move the toy robot one unit forward in the direction it is currently facing.
+- `LEFT` will rotate the robot towards left without changing the position of then robot.
+- `RIGHT` will rotate the robot towards right without changing the position of then robot.
+- `REPORT` will announce the X,Y and F of the robot.
 
-Accepted options are:
-* `--debug` - build the library with debug information
-* `--release` - build the library, optimizing for speed (no debug symbols)
-* `--clean` - removes exisiting build files before running the build
-* `--verbose` - show more information during a build
-* `--strict` - treat warnings as errors
-* `--test` - run unit tests - if no build mode is specified, assumes release
-* `--pull` - pull down the latest VoltScript binary from Nexus, extract it into the bin/ directory, and use it to run unit tests. Mostly used in automated Jenkins builds.
-* `--win32` - the build is for 32-bit (x86) Windows. This option is only valid on the Windows platform.
+## Compiling and Building
 
-CMake can also run through another tool that reads the `CMakePresets.json` file, such as Visual Studio Code or Visual Studio. The preset file reproduces the behavior of the build scripts. Advanced users may choose to invoke CMake directly or create their own custom presets in `CMakeUserPresets.json`.
+### Visual Studio Code
+When using VSCode first you need to make sure you have the extensions `C/C++`, `CMake` and `CMake Tools` installed. These extensions should read the CMakeLists.txt files in this project and automatically creates you the necessary build system once you've open this project on your VSCode Explorer. After the build system were created you just need to manually build the project open a new terminal and run the executable file.
 
-To build on Windows, it is recommended to use `vcvarsall.bat` to add all required tools to the prompt's `PATH` variable. Visual Studio creates shortcuts to this .bat file with various arguments in the start menu when installed. Use "x64 Native Tools Command Prompt for VS" when building a 64-bit DLL for use with the standalone VoltScript binary, or "x64_x86 Cross Tools Command Prompt for VS" when building a 32-bit DLL for use with the Notes client.
+### x64 Command line
+You can also build this project using a x64 cmd terminal, just make sure you have `CMake` installed in your system.
 
-CMake will use the first `cl.exe` found in the path, and will not check any others. If you have errors related to undefined externals, make sure your `cl.exe` matches your desired build type. You can check by using the `where cl` command and looking at the first path returned. For example, if the path of the first `cl.exe` ends with `x86\cl.exe`, the command prompt is configured for 32-bit builds only.
+```c++
 
-# Tests
-Unit tests and their dependencies are located in the `tests` directory, and reports are generated in the `tests/unit-test-reports` directory. Run the tests from this directory to prevent test artifacts from cluttering your local repository.
-"# ToyRobotProgram" 
+// go to the ToyRobot directory
+cd ToyRobot 
+
+// build the CMake build system
+cmake -S . -B build
+
+// build ToyRobot project
+cmake --build build
+
+```
+This will automatically creates your executable file and unit testing.
+
+## Running and Testing
+
+```c++
+
+// change into the created build directory
+cd build
+
+// run program (ToyRobot.exe)
+.\Debug\ToyRobot.exe
+
+// run ctest (ToyRobotTest)
+ctest
+// or for detailed information
+ctest --verbose
+
+
+```

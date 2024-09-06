@@ -12,16 +12,18 @@ This application is a simulation of a toy robot moving on a square table top, of
 
 ## Compiling and Building
 
+Make sure you have `CMake` installed in your system.
+
 ### Visual Studio Code
 When using VSCode first you need to make sure you have the extensions `C/C++`, `CMake` and `CMake Tools` installed. These extensions should read the CMakeLists.txt files in this project and automatically creates you the necessary build system once you've open this project on your VSCode Explorer. After the build system were created you just need to manually build the project open a new terminal and run the executable file.
 
 ### x64 Command line
-You can also build this project using a x64 cmd terminal, just make sure you have `CMake` installed in your system.
+You can also build this project using a x64 cmd terminal.
 
 ```c++
 
-// go to the ToyRobot directory
-cd ToyRobot 
+// go to the ToyRobotProgram directory
+cd ToyRobotProgram
 
 // build the CMake build system
 cmake -S . -B build

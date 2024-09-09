@@ -49,7 +49,7 @@ ctest
 // or for detailed information
 ctest --verbose
 // or run the test executable file
-.test\Debug\ToyRobotTest.exe
+.\test\Debug\ToyRobotTest.exe
 
 
 ```

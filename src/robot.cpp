@@ -31,6 +31,10 @@ void Robot::setPlace(vector<string> coordinate, Robot& toy){
 \*=============================================================================*/
 void Robot::moveForward(Robot& toy){
 
+    if(!toy.inTable){
+            throw invalid_argument("Place ToyRobot in the table first!");
+    }
+
     // Get the Max Position of both TableX and TableY constant array.
     int maxPosX, maxPosY, curX, curY;
     maxPosX = stoi(tableX.back());
@@ -59,6 +63,10 @@ void Robot::moveForward(Robot& toy){
 \*=============================================================================*/
 void Robot::faceRight(Robot& toy){
 
+    if(!toy.inTable){
+        throw invalid_argument("Place ToyRobot in the table first!");
+    }
+
     // Get the Last Direction of the Face constant array.
     string lastDir = face.back();
     auto it = find(face.begin(), face.end(), toy.direction); 
@@ -77,6 +85,10 @@ void Robot::faceRight(Robot& toy){
  faceLeft - Changes the direction of the ToyRobot by facing left.
 \*=============================================================================*/
 void Robot::faceLeft(Robot& toy){
+
+    if(!toy.inTable){
+        throw invalid_argument("Place ToyRobot in the table first!");
+    }
 
     // Get the First Direction of the Face constant array.
     string firstDir = face.front();
@@ -97,9 +109,12 @@ void Robot::faceLeft(Robot& toy){
  current coordinate location of the ToyRobot.
 \*=============================================================================*/
 void Robot::getReport(Robot& toy){
-    if(toy.inTable){
-        cout << to_string(toy.x) << ", " + to_string(toy.y) << ", " + toy.direction << endl;
-    }
+
+    if(!toy.inTable){
+            throw invalid_argument("Place ToyRobot in the table first!");
+    } 
+
+    cout << to_string(toy.x) << ", " + to_string(toy.y) << ", " + toy.direction << endl;
 }
 
 /*=============================================================================*\
@@ -115,24 +130,12 @@ void Robot::processComms(string input, Robot& toy){
         vector<string> coordinate = toy.checkValidity(input); 
         toy.setPlace(coordinate,toy);
     } else if(command == "REPORT"){ // Command for reporting the ToyRobot current coordinate.
-        if(!inTable){
-            throw invalid_argument("Place ToyRobot in the table first!");
-        }
         toy.getReport(toy); 
     } else if(command == "MOVE"){ // Command for moving ToyRobot forward.
-        if(!inTable){
-            throw invalid_argument("Place ToyRobot in the table first!");
-        }
         toy.moveForward(toy);
     } else if(command == "RIGHT"){ // Command for rotating ToyRobot to face rightside.
-        if(!inTable){
-            throw invalid_argument("Place ToyRobot in the table first!");
-        }
         toy.faceRight(toy);
     } else if(command == "LEFT"){ // Command for rotating ToyRobot to face leftside.
-        if(!inTable){
-            throw invalid_argument("Place ToyRobot in the table first!");
-        }
         toy.faceLeft(toy);
     } else {
         throw invalid_argument("ToyRobot did not recognize the command!"); // Invalid command thow exception.

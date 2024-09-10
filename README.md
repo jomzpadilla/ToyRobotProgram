@@ -6,8 +6,8 @@ This application is a simulation of a toy robot moving on a square table top, of
 
 - `PLACE` will put the toy robot on the table in position X,Y and facing NORTH, SOUTH, EAST or WEST.
 - `MOVE`  will move the toy robot one unit forward in the direction it is currently facing.
-- `LEFT` will rotate the robot towards left without changing the position of then robot.
-- `RIGHT` will rotate the robot towards right without changing the position of then robot.
+- `LEFT` will rotate the robot towards left without changing the position of the robot.
+- `RIGHT` will rotate the robot towards right without changing the position of the robot.
 - `REPORT` will announce the X,Y and F of the robot.
 
 ## Compiling and Building
